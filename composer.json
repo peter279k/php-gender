@@ -1,0 +1,33 @@
+{
+    "name": "lee/php-gender",
+    "type": "library",
+    "description": "Check the gender",
+    "keywords": ["library", "gender"],
+    "homepage": "http://github.com/peter279k/php-gender",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "peter",
+            "email": "peter279k@gmail.com",
+            "homepage": "https://peterli.website"
+        }
+    ],
+    "require": {
+        "php": ">=7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5",
+        "php-coveralls/php-coveralls": "dev-master",
+        "infection/infection": "^0.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Peter\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Peter\\": "test"
+        }
+    }
+}

@@ -1,0 +1,3 @@
+vendor/
+infection-log.txt
+.editorconfig
