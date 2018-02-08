@@ -13,8 +13,5 @@ class CheckGenderTest extends TestCase
 
         $gender = new CheckGender(20);
         $this->assertTrue($gender->check());
-
-        $gender = new CheckGender(18);
-        $this->assertTrue($gender->check());
     }
 }
