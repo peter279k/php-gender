@@ -20,7 +20,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: mbstring, pdo, pdo_mysql, intl, zip, bcmath, gmp
-          coverage: xdebug
+          coverage: pcov
 
       - name: Check PHP Version
         run: php -v
@@ -32,7 +32,7 @@ jobs:
         run: composer update --prefer-dist --no-progress
 
       - name: Run test suite
-        run:  XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-clover=./build/logs/clover.xml
+        run:  ./vendor/bin/phpunit --coverage-clover=./build/logs/clover.xml
 
       - name: Run mutation tests
         run: ./vendor/bin/infection

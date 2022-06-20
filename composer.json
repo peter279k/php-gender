@@ -29,5 +29,10 @@
         "psr-4": {
             "Peter\\": "test"
         }
+    },
+    "config": {
+        "allow-plugins": {
+            "infection/extension-installer": true
+        }
     }
 }
