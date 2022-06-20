@@ -1,0 +1,44 @@
+name: build
+
+on: [ push, pull_request ]
+
+jobs:
+  run:
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      matrix:
+        operating-system: [ ubuntu-latest ]
+        php-versions: [ '7.4', '8.0', '8.1' ]
+    name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, pdo, pdo_mysql, intl, zip, bcmath, gmp
+          coverage: xdebug
+
+      - name: Check PHP Version
+        run: php -v
+
+      - name: Check Composer Version
+        run: composer -V
+
+      - name: Install dependencies for PHP
+        run: composer update --prefer-dist --no-progress
+
+      - name: Run test suite
+        run:  XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-clover=./build/logs/clover.xml
+
+      - name: Run mutation tests
+        run: ./vendor/bin/infection
+
+      - name: Upload coverage results for PHP 7.4
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: matrix.php-versions < '8.0'
+        run: vendor/bin/php-coveralls --coverage_clover=./build/logs/clover.xml -v
