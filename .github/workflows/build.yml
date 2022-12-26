@@ -37,7 +37,7 @@ jobs:
       - name: Run mutation tests
         run: ./vendor/bin/infection
 
-      - name: Upload coverage results for PHP 7.4
+      - name: Upload coverage results for PHP 8.0
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         if: matrix.php-versions == '8.0'
